@@ -1,0 +1,1 @@
+SELECT * FROM luminar_educatics_db.alumnos;
