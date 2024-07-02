@@ -18,8 +18,8 @@ def get_alumno(alumno_id):
 def create_alumno():
     data = request.json
     # Validation should be done here
-    if not data.get('nombre'):
-        return jsonify({'message': 'El campo nombre es obligatorio'}), 400
+    #if not data.get('nombre'):
+     #   return jsonify({'message': 'El campo nombre es obligatorio'}), 400
     new_alumno = Alumno(None, data['nombre'], data['apellido'], data['email'], data['foto'])
     new_alumno.save()
     response = {'message': 'Alumno creado con exito'}

@@ -1,3 +1,4 @@
+from app.database import get_db
 class Alumno:
     def __init__(self, id_alumno=None, nombre=None, apellido=None, email=None, foto=None):
         self.id_alumno = id_alumno
