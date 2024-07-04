@@ -1,6 +1,9 @@
 from app.database import get_db
+
 class Alumno:
-    def __init__(self, id_alumno=None, nombre=None, apellido=None, email=None, foto=None):
+
+    #contructor
+    def __init__(self,id_alumno=None,nombre=None,apellido=None,email=None,foto=None):
         self.id_alumno = id_alumno
         self.nombre = nombre
         self.apellido = apellido
@@ -9,21 +12,24 @@ class Alumno:
 
     def serialize(self):
         return {
-            'id_alumno': self.id_alumno,
-            'nombre': self.nombre,
-            'apellido': self.apellido,
-            'email': self.email,
-            'foto': self.foto,
+            'id_alumno':self.id_alumno,
+            'nombre':self.nombre,
+            'apellido':self.apellido,
+            'email':self.email,
+            'foto':self.foto,
         }
 
     @staticmethod
     def get_all():
+        #logica de buscar en la base todas las peliculas
         db = get_db()
         cursor = db.cursor()
         query = "SELECT * FROM alumnos"
         cursor.execute(query)
+        #obtengo resultados
         rows = cursor.fetchall()
         alumnos = [Alumno(id_alumno=row[0], nombre=row[1], apellido=row[2], email=row[3], foto=row[4]) for row in rows]
+        #cerramos el cursor
         cursor.close()
         return alumnos
 
@@ -39,8 +45,9 @@ class Alumno:
             cursor.execute("""
                 INSERT INTO alumnos (nombre, apellido, email, foto) VALUES (%s, %s, %s, %s)
             """, (self.nombre, self.apellido, self.email, self.foto))
+            #voy a obtener el último id generado
             self.id_alumno = cursor.lastrowid
-        db.commit()
+        db.commit() #confirmar la accion
         cursor.close()
 
     @staticmethod
